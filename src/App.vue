@@ -299,12 +299,132 @@ let onCreate = () => {
         }
 }
 
+let list12 = ref([{
+    name: "Java程序设计", point:1.5, checked: false
+}, {
+    name: "Swift程序设计实践", point:1.5, checked: false
+}, {
+    name: "智能计算概论", point:2, checked: false
+}, {
+    name: "Unix系统", point:1.5, checked: false
+}, {
+    name: "社会计算", point:2, checked: false
+}, {
+    name: "计算引论", point:1, checked: false
+}, {
+    name: "离散数学（3）", point:3, checked: false
+}, {
+    name: "C++与C#程序设计", point:1.5, checked: false
+}, {
+    name: "Python程序设计（全英文）", point:2, checked: false
+}, {
+    name: "计算机视觉计算", point:2, checked: false
+}, {
+    name: "移动应用创新实践", point:3, checked: false
+}, {
+    name: "并行计算程序设计", point:2, checked: false
+}, {
+    name: "多媒体技术", point:2, checked: false
+}, {
+    name: "分布式系统原理", point:2, checked: false
+}, {
+    name: "高级语言程序设计方法学", point:2, checked: false
+}, {
+    name: "互联网软件新技术（XML和Web)", point:2, checked: false
+}, {
+    name: "MATLAB基础及其应用", point:2, checked: false
+}, {
+    name: "机器学习导论", point:2.5, checked: false
+}, {
+    name: "计算机工程中最优化的方法", point:2, checked: false
+}, {
+    name: "计算机控制", point:2, checked: false
+}, {
+    name: "计算机图形学", point:2, checked: false
+}, {
+    name: "具体数学", point:1.5, checked: false
+}, {
+    name: "领导力培养与提升", point:2, checked: false
+}, {
+    name: "区块链与数字经济", point:1, checked: false
+}, {
+    name: "Android平台开发技术", point:2, checked: false
+}, {
+    name: "嵌入式系统设计实训", point:2, checked: false
+}, {
+    name: "软件测试技术", point:2, checked: false
+}, {
+    name: "数据挖掘导论", point:2.5, checked: false
+}, {
+    name: "数学建模入门", point:1.5, checked: false
+}, {
+    name: "物联网引论", point:2, checked: false
+}, {
+    name: "无线网络系统", point:2, checked: false
+}, {
+    name: "信号与系统", point:2, checked: false
+}, {
+    name: "虚拟现实技术", point:2, checked: false
+}, {
+    name: "形式语言与自动机", point:2, checked: false
+}, {
+    name: "移动计算导论", point:2, checked: false
+}, {
+    name: "RUBY语言程序设计", point:1, checked: false
+}, {
+    name: "智能计算体系结构", point:2, checked: false
+}, {
+    name: "并行计算程序设计", point:2, checked: false
+}, {
+    name: "FPGA多核并行计算", point:2, checked: false
+}, {
+    name: "大数据分析", point:2, checked: false
+}, {
+    name: "机器学习工程基础", point:2, checked: false
+}, {
+    name: "电子商务", point:1, checked: false
+}, {
+    name: "高级算法设计与分析", point:2, checked: false
+}, {
+    name: "X86汇编程序设计", point:2, checked: false
+}, {
+    name: "计算机图形学", point:2, checked: false
+}, {
+    name: "计算机网络安全技术", point:2, checked: false
+}, {
+    name: "人工智能", point:2, checked: false
+}, {
+    name: "人工智能安全导论", point:2, checked: false
+}, {
+    name: "人工智能的计算与信息理论", point:3, checked: false
+}, {
+    name: "人机交互 ", point:2, checked: false
+}, {
+    name: "软件项目管理", point:1.5, checked: false
+}, {
+    name: "深度学习", point:2.5, checked: false
+}, {
+    name: "数据可视化分析技术", point:2, checked: false
+}, {
+    name: "图象处理与模式识别", point:2, checked: false
+}, {
+    name: "网络攻防技术", point:2, checked: false
+}, {
+    name: "物联网与大数据系统设计", point:2, checked: false
+}, {
+    name: "物联网引论", point:2, checked: false
+}, {
+    name: "信号处理与信息推断", point:2, checked: false
+}, {
+    name: "信息系统分析与设计", point:1.5, checked: false
+}, ])
+
 let tot12 = computed(() => {
   let t = 0
   for (let i = 0; i < customValue.value.length; i++) {
     t += customValue.value[i].num
   }
-  return t
+  return t + tot(list12)
 })
 
 let TOT3 = computed(() => tot9.value + tot10.value + tot11.value + tot12.value)
@@ -401,7 +521,11 @@ function tot(l) {
           </template>
         </n-checkbox></div>
         <br>
-        <strong>此外，还有15分一般专业课，已取得{{ tot12 }}分</strong>
+        <div><strong>此外，还有15分一般专业课，已取得{{ tot12 }}分</strong></div>
+        <div>先看看下面你上过哪些：</div>
+        <div><n-checkbox v-for="c in list12" v-model:checked="c.checked">{{ c.name }}, {{ c.point }}分</n-checkbox></div>
+        <br>
+        <div>没找到的话：</div>
         <n-dynamic-input v-model:value="customValue" :on-create="onCreate">
         <template #default="{ value }">
           <div style="display: flex; align-items: center; width: 100%">
